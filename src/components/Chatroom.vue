@@ -15,11 +15,17 @@
     </div>
     <div class="block2" :class="{'is-customer': senderType === 'Customer'}" v-if="isChatRoomOpened">
       <div class="messageReceiver">
-        You are talking to : {{receiver}}
+        {{receiver}}
       </div>
       <div class="messageList" id="msgList">
         <div v-for="(value, index) in listMessages" :key="index">
-          {{value.sender}} : {{value.text}}
+          <div class="messageContainer" :class="[`is-sender-${value.senderType === senderType}`]">
+            <span class="messageSender">{{value.sender}}</span><br>
+            <span>{{value.text}}</span><br>
+            <span class="messageTimestamp">
+              {{msToHMS(value.sendDate)}}
+            </span>
+          </div>
         </div>
       </div>
       <div class="messageBox">
@@ -101,6 +107,11 @@ export default {
     scrollToBottom() {
       var element = document.getElementById("msgList")
       element.scrollTop = element.scrollHeight
+    },
+    msToHMS( ms ) {
+      let date = new Date(ms);
+      let time = date.toString().split(" ")[4];
+      return time && time.substring(0, time.length - 3)
     }
   },
   mounted() {
@@ -120,6 +131,31 @@ export default {
 </script>
 
 <style>
+.messageSender{
+  font-weight: bolder;
+}
+.messageTimestamp{
+  font-size: 10px;
+  color: rgba(0,0,0,0.6)
+}
+.is-sender-true{
+  margin-left: auto;
+  background-color: #f1f1f1;
+  border-radius: 18px 0 18px 18px;
+}
+.is-sender-false{
+  background-color: #f1f1f1;
+  border-radius: 0 18px 18px 18px;
+}
+.messageContainer{
+  font-size: 14px;
+  width: fit-content;
+  grid-gap: 5px;
+  padding: 7px 16px;
+  max-width: 80%;
+  border: 1px solid #f1f1f1;
+  color: #333333;
+}
 .messageReceiver{
   font-weight: bold;
   font-size: 20px;
@@ -167,7 +203,8 @@ button{
   width: 20%;
   border-radius: 8px;
   margin-right: 4px;
-  height: 350px;
+  max-height: 350px;
+  padding-top: 36px;
 }
 .block2{
   display: inline-block;
