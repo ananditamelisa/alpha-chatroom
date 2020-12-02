@@ -39,15 +39,16 @@ import { rtdbPlugin as VueFire } from 'vuefire'
 
 Vue.use(VueFire)
 
+//paste your firebase config here
 const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyCXd8QyFdxrfPDMjjt3qwkOmncIOGLpesw",
-    authDomain: "alpha-chatroom.firebaseapp.com",
-    databaseURL: "https://alpha-chatroom.firebaseio.com",
-    projectId: "alpha-chatroom",
-    storageBucket: "alpha-chatroom.appspot.com",
-    messagingSenderId: "243598382255",
-    appId: "1:243598382255:web:f8bfb6db6a50512e56705a",
-    measurementId: "G-LZS1P1KSBH"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
   };
 
 export default {
